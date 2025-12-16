@@ -22,6 +22,9 @@ module.exports = {
     level: process.env.LOG_LEVEL || 'silly',
   },
 
+  // Configuration CORS
+  corsOrigin: process.env.CORS_ORIGIN || '*',
+
   // Configuration API
   api: {
     prefix: '/api',

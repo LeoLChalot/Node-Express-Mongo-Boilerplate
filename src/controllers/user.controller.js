@@ -1,6 +1,8 @@
 const userService = require('#services/user.service');
 
 exports.SignUp = async (req, res, next) => {
+  console.log("USERS::CONTROLLER::SignUp");
+  console.table(req.body);
   try {
 
     // 1. Extraction des données
@@ -24,6 +26,8 @@ exports.SignUp = async (req, res, next) => {
 };
 
 exports.SignIn = async (req, res, next) => {
+  console.log("USERS::CONTROLLER::SignIn");
+  console.table(req.body);
   try {
     const { email, password } = req.body;
 
@@ -40,6 +44,7 @@ exports.SignIn = async (req, res, next) => {
 };
 
 exports.GetUsers = async (req, res, next) => {
+  console.log("USERS::CONTROLLER::GetUsers");
   try {
     const users = await userService.getUsers();
     res.status(200).json({ success: true, data: users });
@@ -49,6 +54,7 @@ exports.GetUsers = async (req, res, next) => {
 };
 
 exports.GetUserById = async (req, res, next) => {
+  console.log("USERS::CONTROLLER::GetUserById");
   try {
     const userId = req.params.id;
     const user = await userService.getUserById(userId);
@@ -59,6 +65,7 @@ exports.GetUserById = async (req, res, next) => {
 };
 
 exports.UpdateUser = async (req, res, next) => {
+  console.log("USERS::CONTROLLER::UpdateUser");
   try {
     const userId = req.params.id;
     const updateData = req.body;
@@ -70,6 +77,7 @@ exports.UpdateUser = async (req, res, next) => {
 };
 
 exports.DeleteUser = async (req, res, next) => {
+  console.log("USERS::CONTROLLER::DeleteUser");
   try {
     const userId = req.params.id;
     await userService.deleteUser(userId);
