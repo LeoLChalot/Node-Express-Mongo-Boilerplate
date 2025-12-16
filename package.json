@@ -1,5 +1,5 @@
 {
-  "name": "tp-express-1",
+  "name": "tp-express-2",
   "version": "1.0.0",
   "description": "A simple Express.js project with MongoDB integration",
   "license": "ISC",
@@ -16,6 +16,8 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "joi": "^18.0.2",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.0.1"
   },
   "devDependencies": {
