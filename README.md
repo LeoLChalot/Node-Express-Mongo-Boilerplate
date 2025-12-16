@@ -1,4 +1,4 @@
-# TP Express 1 - API REST Node.js
+# Node Express MongoDB - Boilerplate
 
 Ce projet est une API REST construite avec Node.js, Express et MongoDB. Il sert de base (boilerplate) solide pour le développement d'applications backend, suivant une Architecture en Couches (Layered Architecture) pour assurer scalabilité, testabilité et maintenabilité.
 
@@ -33,7 +33,7 @@ Suivez ces étapes pour installer et lancer le projet localement :
 1. Cloner le projet
 ```bash
 git clone <votre-repo-url>
-cd tp-express-1
+cd Node-Express-Mongo-Boilerplate
 ```
 
 2. Installer les dépendances
@@ -149,5 +149,6 @@ Pour tester l'inscription d'un utilisateur (via Postman, Insomnia ou cURL) :
 }
 ```
 
-#### 👤 Auteur
+#### 👤 Aut
+eur
 *LeoLChalot*
