@@ -18,9 +18,21 @@
     "express": "^5.2.1",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
+    "module-alias": "^2.2.3",
     "mongoose": "^9.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
+  },
+  "imports": {
+    "#config/*": "./src/config/*.js",
+    "#components/*": "./src/components/*.js",
+    "#utils/*": "./src/utils/*.js",
+    "#models/*": "./src/models/*.js",
+    "#loaders/*": "./src/loaders/*.js",
+    "#services/*": "./src/services/*.js",
+    "#controllers/*": "./src/controllers/*.js",
+    "#routes/*": "./src/routes/*.js",
+    "#middlewares/*": "./src/middlewares/*.js"
   }
 }

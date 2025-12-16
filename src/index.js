@@ -1,7 +1,7 @@
 const express = require('express');
-const userRoutes = require('./routes/userRoutes');
-const config = require('./config');
-const connectDB = require('./loaders/mongoose');
+const userRoutes = require('#routes/user.routes');
+const config = require('#config/index');
+const connectDB = require('#loaders/mongoose');
 
 async function startServer() {
   const app = express();
