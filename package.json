@@ -1,5 +1,5 @@
 {
-  "name": "tp-express-2",
+  "name": "node-express-mongodb-boilerplate",
   "version": "1.0.0",
   "description": "A simple Express.js project with MongoDB integration",
   "license": "ISC",
