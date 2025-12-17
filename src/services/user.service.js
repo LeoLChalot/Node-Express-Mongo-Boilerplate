@@ -1,3 +1,4 @@
+const ApiResponse = require('#utils/apiResponse.util');
 const User = require('#models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -19,37 +20,37 @@ exports.signUpUser = async (userData) => {
     password: hashedPassword
   });
 
-  return newUser;
+  return ApiResponse.success({ id: newUser._id, email: newUser.email }, "Utilisateur créé avec succès", 201);
 };
 
 exports.signInUser = async (credentials) => {
   const user = await User.findOne({ email: credentials.email });
   if (!user) {
-    return { statusCode: 401, error: true, message: 'Email ou mot de passe incorrect.' };
+    return ApiResponse.error('Email ou mot de passe incorrect.', 401);
   }
 
   const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
   if (!isPasswordValid) {
-    return { statusCode: 401, error: true, message: 'Email ou mot de passe incorrect.' };
+    return ApiResponse.error('Email ou mot de passe incorrect.', 401);
   }
 
   const jwtPayload = { id: user._id, email: user.email };
   const token = jwt.sign(jwtPayload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-  return { statusCode: 200, error: false, message: 'Connexion réussie.', data: { id: user._id, email: user.email, jwt: token } };
+  return ApiResponse.success({ token }, "Authentification réussie", 200);
 };
 
 exports.getUsers = async () => {
   const users = await User.find({}, '-password'); // Exclure les mots de passe
-  return users;
+  return ApiResponse.success(users, "Liste des utilisateurs récupérée avec succès", 200);
 };
 
 exports.getUserById = async (userId) => {
   const user = await User.findById(userId, '-password'); // Exclure le mot de passe
   if (!user) {
-    throw new Error('Utilisateur non trouvé.');
+    return ApiResponse.error('Utilisateur non trouvé.', 404);
   }
-  return user;
+  return ApiResponse.success(user, "Utilisateur récupéré avec succès", 200);
 };
 
 exports.updateUser = async (userId, updateData) => {
@@ -58,15 +59,15 @@ exports.updateUser = async (userId, updateData) => {
   }
   const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true, select: '-password' });
   if (!updatedUser) {
-    throw new Error('Utilisateur non trouvé.');
+    return ApiResponse.error('Utilisateur non trouvé.', 404);
   }
-  return updatedUser;
+  return ApiResponse.success(updatedUser, "Utilisateur mis à jour avec succès", 200);
 };
 
 exports.deleteUser = async (userId) => {
   const deletedUser = await User.findByIdAndDelete(userId);
   if (!deletedUser) {
-    throw new Error('Utilisateur non trouvé.');
+    return ApiResponse.error('Utilisateur non trouvé.', 404);
   }
-  return deletedUser;
+  return ApiResponse.success(null, "Utilisateur supprimé avec succès", 200);
 };

@@ -1,4 +1,5 @@
 const userService = require('#services/user.service');
+const ApiResponse = require('#utils/apiResponse.util');
 
 exports.SignUp = async (req, res, next) => {
   console.log("USERS::CONTROLLER::SignUp");
@@ -46,8 +47,8 @@ exports.SignIn = async (req, res, next) => {
 exports.GetUsers = async (req, res, next) => {
   console.log("USERS::CONTROLLER::GetUsers");
   try {
-    const users = await userService.getUsers();
-    res.status(200).json({ success: true, data: users });
+    const result = await userService.getUsers();
+    res.status(result.statusCode).json(result);
   } catch (error) {
     next(error);
   }
@@ -57,8 +58,8 @@ exports.GetUserById = async (req, res, next) => {
   console.log("USERS::CONTROLLER::GetUserById");
   try {
     const userId = req.params.id;
-    const user = await userService.getUserById(userId);
-    res.status(200).json({ success: true, data: user });
+    const result = await userService.getUserById(userId);
+    res.status(result.statusCode).json(result);
   } catch (error) {
     next(error);
   }
@@ -69,8 +70,8 @@ exports.UpdateUser = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const updateData = req.body;
-    const updatedUser = await userService.updateUser(userId, updateData);
-    res.status(200).json({ success: true, data: updatedUser });
+    const result = await userService.updateUser(userId, updateData);
+    res.status(result.statusCode).json(result);
   } catch (error) {
     next(error);
   }
@@ -80,8 +81,8 @@ exports.DeleteUser = async (req, res, next) => {
   console.log("USERS::CONTROLLER::DeleteUser");
   try {
     const userId = req.params.id;
-    await userService.deleteUser(userId);
-    res.status(200).json({ success: true, message: 'Utilisateur supprimé avec succès.' });
+    const result = await userService.deleteUser(userId);
+    res.status(result.statusCode).json(result);
   } catch (error) {
     next(error);
   }
